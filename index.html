@@ -41,14 +41,16 @@
       <button type="submit">Generate</button>
     </form>
 
-    <div id="output">
+    <div id="loading" style="display: none; font-weight: bold; color: green;">⏳ Generating resume...</div>
+
+    <div id="output" style="margin-top: 20px;">
       <h2>Generated Resume</h2>
-      <pre id="resumeOutput"></pre>
+      <pre id="resume-output"></pre>
 
       <h2>Generated Cover Letter</h2>
-      <pre id="coverOutput"></pre>
+      <pre id="cover-output"></pre>
 
-      <button onclick="downloadPDF()">Download Resume as PDF</button>
+      <!-- <button onclick="downloadPDF()">Download Resume as PDF</button> -->
     </div>
   </div>
 

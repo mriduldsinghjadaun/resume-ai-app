@@ -1,5 +1,14 @@
-document.querySelector("form").addEventListener("submit", async function (e) {
+const form = document.querySelector("form");
+const loading = document.getElementById("loading");
+const resumeOutput = document.getElementById("resume-output");
+const coverOutput = document.getElementById("cover-output");
+
+form.addEventListener("submit", async function (e) {
   e.preventDefault();
+
+  loading.style.display = "block"; // Show loading
+  resumeOutput.textContent = "";
+  coverOutput.textContent = "";
 
   const data = {
     name: document.getElementById("name").value,
@@ -10,7 +19,7 @@ document.querySelector("form").addEventListener("submit", async function (e) {
     skills: document.getElementById("skills").value,
     experience: document.getElementById("experience").value,
     education: document.getElementById("education").value,
-    job_description: document.getElementById("job_description").value,
+    job_description: document.getElementById("jobdesc").value, // ✅ Corrected ID here
   };
 
   try {
@@ -28,12 +37,16 @@ document.querySelector("form").addEventListener("submit", async function (e) {
       throw new Error(`Server returned ${res.status}: ${text}`);
     }
 
-    const json = JSON.parse(text); // ✅ Now will only try parsing if response is OK
+    const json = JSON.parse(text);
 
-    document.getElementById("resume-output").textContent = json.resume_raw;
-    document.getElementById("cover-output").textContent = json.cover_raw;
+    resumeOutput.textContent = json.resume_raw || "No resume generated.";
+    coverOutput.textContent = json.cover_raw || "No cover letter generated.";
   } catch (err) {
     console.error("Error generating resume:", err);
-    alert("Error generating resume. Check console.");
+    alert("❌ Error generating resume. Check console.");
+    resumeOutput.textContent = "❌ Failed to generate resume.";
+    coverOutput.textContent = "❌ Failed to generate cover letter.";
+  } finally {
+    loading.style.display = "none"; // Hide loading
   }
 });
