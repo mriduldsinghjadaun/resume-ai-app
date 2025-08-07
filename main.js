@@ -1,9 +1,7 @@
-// main.js
-
-document.getElementById("resumeForm").addEventListener("submit", async function (e) {
+document.querySelector("form").addEventListener("submit", async function (e) {
   e.preventDefault();
 
-  const payload = {
+  const data = {
     name: document.getElementById("name").value,
     title: document.getElementById("title").value,
     location: document.getElementById("location").value,
@@ -12,30 +10,30 @@ document.getElementById("resumeForm").addEventListener("submit", async function 
     skills: document.getElementById("skills").value,
     experience: document.getElementById("experience").value,
     education: document.getElementById("education").value,
-    job_description: document.getElementById("jobdesc").value,
+    job_description: document.getElementById("job_description").value,
   };
 
   try {
-    const response = await fetch("/api/generate", {
+    const res = await fetch("/api/generate", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
     });
 
-    const data = await response.json();
-    const resumeData = JSON.parse(data.resume_raw);
-    const coverData = JSON.parse(data.cover_raw);
+    const text = await res.text();
 
-    document.getElementById("resumeOutput").textContent = JSON.stringify(resumeData, null, 2);
-    document.getElementById("coverOutput").textContent = coverData.cover_letter;
+    if (!res.ok) {
+      throw new Error(`Server returned ${res.status}: ${text}`);
+    }
 
+    const json = JSON.parse(text); // ✅ Now will only try parsing if response is OK
+
+    document.getElementById("resume-output").textContent = json.resume_raw;
+    document.getElementById("cover-output").textContent = json.cover_raw;
   } catch (err) {
-    alert("Error generating resume. Please try again.");
-    console.error(err);
+    console.error("Error generating resume:", err);
+    alert("Error generating resume. Check console.");
   }
 });
-
-function downloadPDF() {
-  const element = document.getElementById("output");
-  html2pdf().from(element).save("resume_and_cover_letter.pdf");
-}

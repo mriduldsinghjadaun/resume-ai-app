@@ -85,7 +85,7 @@ Return only the JSON.
 
     res.status(200).json({ resume_raw, cover_raw });
   } catch (err) {
-    console.error("Groq API error:", err);
+    console.error("Resume or Cover response failed:", err);
     res.status(500).json({ error: "Groq API call failed", details: err.message });
-  }
+
 }
