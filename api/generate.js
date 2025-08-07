@@ -56,7 +56,7 @@ Return only the JSON.
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        model: "mixtral-8x7b-32768",
+        model: "llama3-70b-8192",
         messages: [{ role: "user", content: resumePrompt }],
         max_tokens: 1000,
         temperature: 0.5,
@@ -74,7 +74,7 @@ Return only the JSON.
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        model: "mixtral-8x7b-32768",
+        model: "llama3-70b-8192",
         messages: [{ role: "user", content: coverPrompt }],
         max_tokens: 700,
         temperature: 0.5,
