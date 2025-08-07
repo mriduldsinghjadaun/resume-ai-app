@@ -1,6 +1,7 @@
 // api/generate.js (Groq version)
 
-const fetch = require("node-fetch");
+import fetch from 'node-fetch'; // ✅ RIGHT
+
 
 module.exports = async (req, res) => {
   if (req.method !== "POST") {
