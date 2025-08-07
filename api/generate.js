@@ -1,8 +1,8 @@
-import fetch from 'node-fetch';
+import fetch from "node-fetch";
 
-export default async function handler(req, res) {
-  if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Only POST allowed' });
+export default async (req, res) => {
+  if (req.method !== "POST") {
+    return res.status(405).json({ error: "Only POST requests allowed" });
   }
 
   const {
@@ -85,7 +85,7 @@ Return only the JSON.
 
     res.status(200).json({ resume_raw, cover_raw });
   } catch (err) {
-    console.error("Resume or Cover response failed:", err);
+    console.error(err);
     res.status(500).json({ error: "Groq API call failed", details: err.message });
-
-}
+  }
+};
