@@ -1,11 +1,8 @@
-// api/generate.js (Groq version)
+import fetch from 'node-fetch';
 
-import fetch from 'node-fetch'; // ✅ RIGHT
-
-
-module.exports = async (req, res) => {
-  if (req.method !== "POST") {
-    return res.status(405).json({ error: "Only POST allowed" });
+export default async function handler(req, res) {
+  if (req.method !== 'POST') {
+    return res.status(405).json({ error: 'Only POST allowed' });
   }
 
   const {
@@ -88,7 +85,7 @@ Return only the JSON.
 
     res.status(200).json({ resume_raw, cover_raw });
   } catch (err) {
-    console.error(err);
+    console.error("Groq API error:", err);
     res.status(500).json({ error: "Groq API call failed", details: err.message });
   }
-};
+}
