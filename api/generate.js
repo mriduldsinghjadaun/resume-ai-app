@@ -64,6 +64,7 @@ Return only the JSON.
     });
 
     const resumeData = await resumeRes.json();
+    console.log("Resume Raw Groq Response:", resumeData); // 🪵 Log Groq response
     const resume_raw = resumeData?.choices?.[0]?.message?.content || "❌ Resume generation failed.";
 
     const coverRes = await fetch("https://api.groq.com/openai/v1/chat/completions", {
@@ -81,6 +82,7 @@ Return only the JSON.
     });
 
     const coverData = await coverRes.json();
+    console.log("Cover Letter Raw Groq Response:", coverData); // 🪵 Log Groq response
     const cover_raw = coverData?.choices?.[0]?.message?.content || "❌ Cover letter generation failed.";
 
     res.status(200).json({ resume_raw, cover_raw });
