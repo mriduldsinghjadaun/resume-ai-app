@@ -64,7 +64,7 @@ Return only the JSON.
     });
 
     const resumeData = await resumeRes.json();
-    const resume_raw = resumeData.choices[0].message.content;
+    const resume_raw = resumeData?.choices?.[0]?.message?.content || "❌ Resume generation failed.";
 
     const coverRes = await fetch("https://api.groq.com/openai/v1/chat/completions", {
       method: "POST",
@@ -81,7 +81,7 @@ Return only the JSON.
     });
 
     const coverData = await coverRes.json();
-    const cover_raw = coverData.choices[0].message.content;
+    const cover_raw = coverData?.choices?.[0]?.message?.content || "❌ Cover letter generation failed.";
 
     res.status(200).json({ resume_raw, cover_raw });
   } catch (err) {
