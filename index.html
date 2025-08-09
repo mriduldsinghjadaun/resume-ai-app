@@ -11,50 +11,118 @@
     <h1>AI Resume & Cover Letter Generator</h1>
 
     <form id="resumeForm">
+      <!-- Basic contact -->
       <label>Full Name</label>
       <input type="text" id="name" required />
 
-      <label>Title (e.g. Software Developer)</label>
-      <input type="text" id="title" required />
+      <label>Professional Headline (e.g. Frontend Developer)</label>
+      <input type="text" id="headline" placeholder="e.g. Frontend Developer" />
+
+      <label>Short Summary / About (1-2 lines)</label>
+      <textarea id="summary" placeholder="A short professional summary"></textarea>
 
       <label>Location</label>
-      <input type="text" id="location" required />
+      <input type="text" id="location" />
 
       <label>Email</label>
-      <input type="email" id="email" required />
+      <input type="email" id="email" />
 
       <label>Phone</label>
-      <input type="text" id="phone" required />
+      <input type="text" id="phone" />
+
+      <label>LinkedIn URL</label>
+      <input type="text" id="linkedin" placeholder="https://www.linkedin.com/in/..." />
+
+      <label>Portfolio / GitHub URL</label>
+      <input type="text" id="portfolio" placeholder="https://..." />
 
       <label>Skills (comma separated)</label>
-      <input type="text" id="skills" />
+      <input type="text" id="skills" placeholder="HTML, CSS, JavaScript, React" />
 
-      <label>Experience Summary (just 1–2 lines for now)</label>
-      <textarea id="experience"></textarea>
+      <label>Certifications (comma separated)</label>
+      <input type="text" id="certifications" placeholder="e.g. AWS Certified, Coursera..." />
 
-      <label>Education</label>
-      <input type="text" id="education" placeholder="e.g. B.Tech CSE – DSMNRU" />
+      <label>Achievements / Awards (one per line)</label>
+      <textarea id="achievements" placeholder="e.g. Increased traffic by 40%"></textarea>
 
-      <label>Job Description (optional)</label>
-      <textarea id="jobdesc" placeholder="Paste the job you're applying for..."></textarea>
+      <!-- Structured experiences (3 blocks) -->
+      <h3>Experience (add up to 3)</h3>
+
+      <div class="exp-block">
+        <label>Company 1</label>
+        <input type="text" id="company1" placeholder="Company name" />
+        <label>Role 1</label>
+        <input type="text" id="role1" placeholder="Role / Title" />
+        <label>Period 1</label>
+        <input type="text" id="period1" placeholder="e.g. Jun 2023 - Dec 2023" />
+        <label>Bullets 1 (one per line)</label>
+        <textarea id="bullets1" placeholder="Bullet 1\nBullet 2"></textarea>
+      </div>
+
+      <div class="exp-block">
+        <label>Company 2</label>
+        <input type="text" id="company2" placeholder="Company name" />
+        <label>Role 2</label>
+        <input type="text" id="role2" placeholder="Role / Title" />
+        <label>Period 2</label>
+        <input type="text" id="period2" placeholder="e.g. Jan 2022 - May 2023" />
+        <label>Bullets 2 (one per line)</label>
+        <textarea id="bullets2" placeholder="Bullet 1\nBullet 2"></textarea>
+      </div>
+
+      <div class="exp-block">
+        <label>Company 3</label>
+        <input type="text" id="company3" placeholder="Company name" />
+        <label>Role 3</label>
+        <input type="text" id="role3" placeholder="Role / Title" />
+        <label>Period 3</label>
+        <input type="text" id="period3" placeholder="e.g. 2019 - 2021" />
+        <label>Bullets 3 (one per line)</label>
+        <textarea id="bullets3" placeholder="Bullet 1\nBullet 2"></textarea>
+      </div>
+
+      <!-- Education / Projects -->
+      <h3>Education & Projects</h3>
+      <label>Degree</label>
+      <input type="text" id="education_degree" placeholder="e.g. B.Tech CSE" />
+      <label>Institution</label>
+      <input type="text" id="education_institution" placeholder="e.g. DSMNRU" />
+      <label>Year / Period</label>
+      <input type="text" id="education_year" placeholder="e.g. 2022" />
+
+      <label>Project Title (optional)</label>
+      <input type="text" id="project_title" />
+      <label>Project Description</label>
+      <textarea id="project_desc" placeholder="Short project description, your role, tech used, impact"></textarea>
+
+      <!-- Job application fields (user may fill or we will auto-extract) -->
+      <h3>Job Application (optional)</h3>
+      <label>Job Title you're applying for (optional)</label>
+      <input type="text" id="applied_job_title" placeholder="e.g. Frontend Developer" />
+      <label>Company you're applying to (optional)</label>
+      <input type="text" id="applied_company" placeholder="e.g. Example Inc." />
+      <label>Full Job Description / Paste the ad (optional)</label>
+      <textarea id="jobdesc" placeholder="Paste the full job description or link"></textarea>
 
       <button type="submit">Generate</button>
     </form>
 
-    <div id="loading" style="display: none; font-weight: bold; color: green;">⏳ Generating resume...</div>
+    <div id="loading" style="display:none; font-weight:bold; color:green; margin-top: 16px;">
+      ⏳ Generating resume...
+    </div>
 
     <div id="output" style="margin-top: 20px;">
       <h2>Generated Resume</h2>
-      <pre id="resume-output"></pre>
+      <div id="resume-output"></div>
 
       <h2>Generated Cover Letter</h2>
-      <pre id="cover-output"></pre>
+      <div id="cover-output"></div>
 
-      <!-- <button onclick="downloadPDF()">Download Resume as PDF</button> -->
+      <!-- PDF button will be added later -->
+      <!-- <button id="download-pdf">Download Resume as PDF</button> -->
     </div>
   </div>
 
   <script src="main.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
 </body>
 </html>
