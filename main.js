@@ -204,3 +204,171 @@ form.addEventListener("submit", async function (e) {
     loading.style.display = "none";
   }
 });
+
+// PDF Download functionality
+document.getElementById('download-pdf').addEventListener('click', function() {
+  const resumeContent = document.getElementById('resume-output');
+  const coverContent = document.getElementById('cover-output');
+  
+  if (!resumeContent.innerHTML.trim()) {
+    alert('Please generate a resume first before downloading PDF.');
+    return;
+  }
+
+  // Create a new jsPDF instance
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF();
+  
+  // Set up fonts and styling
+  doc.setFont('helvetica');
+  doc.setFontSize(12);
+  
+  let yPosition = 20;
+  const pageHeight = doc.internal.pageSize.height;
+  const margin = 20;
+  const maxWidth = doc.internal.pageSize.width - (margin * 2);
+  
+  // Helper function to add text with word wrapping
+  function addTextWithWrap(text, fontSize = 12, isBold = false, color = [0, 0, 0]) {
+    doc.setFontSize(fontSize);
+    if (isBold) {
+      doc.setFont('helvetica', 'bold');
+    } else {
+      doc.setFont('helvetica', 'normal');
+    }
+    doc.setTextColor(color[0], color[1], color[2]);
+    
+    const lines = doc.splitTextToSize(text, maxWidth);
+    
+    for (let i = 0; i < lines.length; i++) {
+      if (yPosition > pageHeight - 20) {
+        doc.addPage();
+        yPosition = 20;
+      }
+      doc.text(lines[i], margin, yPosition);
+      yPosition += fontSize * 0.4;
+    }
+    yPosition += 5;
+  }
+  
+  // Helper function to add a line separator
+  function addLineSeparator() {
+    if (yPosition > pageHeight - 30) {
+      doc.addPage();
+      yPosition = 20;
+    }
+    doc.setDrawColor(200, 200, 200);
+    doc.line(margin, yPosition, doc.internal.pageSize.width - margin, yPosition);
+    yPosition += 10;
+  }
+  
+  // Get the name for the header
+  const name = document.getElementById('name').value.trim() || 'Resume';
+  
+  // Add header with name
+  addTextWithWrap(name.toUpperCase(), 18, true, [44, 62, 80]);
+  yPosition += 5;
+  
+  // Add headline if available
+  const headline = document.getElementById('headline').value.trim();
+  if (headline) {
+    addTextWithWrap(headline, 14, true, [52, 73, 94]);
+    yPosition += 5;
+  }
+  
+  addLineSeparator();
+  
+  // Process resume content with better structure
+  const resumeElements = resumeContent.querySelectorAll('h3, h4, p, div, ul, li');
+  
+  for (let element of resumeElements) {
+    const tagName = element.tagName.toLowerCase();
+    const text = element.textContent.trim();
+    
+    if (!text) continue;
+    
+    switch (tagName) {
+      case 'h3':
+        addTextWithWrap(text, 16, true, [44, 62, 80]);
+        yPosition += 3;
+        break;
+      case 'h4':
+        addTextWithWrap(text, 14, true, [52, 73, 94]);
+        yPosition += 2;
+        break;
+      case 'p':
+        // Check if it's a contact or skills line
+        if (text.includes('Contact:') || text.includes('Skills:') || text.includes('Certifications:')) {
+          addTextWithWrap(text, 12, true);
+        } else {
+          addTextWithWrap(text, 12, false);
+        }
+        break;
+      case 'div':
+        if (element.classList.contains('exp')) {
+          addTextWithWrap(text, 12, false);
+        } else {
+          addTextWithWrap(text, 12, false);
+        }
+        break;
+      case 'ul':
+        // Handle bullet points
+        const listItems = element.querySelectorAll('li');
+        for (let li of listItems) {
+          addTextWithWrap('• ' + li.textContent.trim(), 12, false);
+        }
+        break;
+      case 'li':
+        addTextWithWrap('• ' + text, 12, false);
+        break;
+      default:
+        addTextWithWrap(text, 12, false);
+    }
+  }
+  
+  // Add cover letter if exists
+  const coverText = coverContent.textContent.trim();
+  if (coverText) {
+    addLineSeparator();
+    addTextWithWrap('COVER LETTER', 16, true, [44, 62, 80]);
+    yPosition += 10;
+    
+    const coverLines = coverText.split('\n');
+    for (let line of coverLines) {
+      if (line.trim()) {
+        addTextWithWrap(line.trim(), 12, false);
+      }
+    }
+  }
+  
+  // Generate filename
+  const filename = `${name.replace(/\s+/g, '_')}_Resume.pdf`;
+  
+  // Save the PDF
+  doc.save(filename);
+});
+
+// Helper function to extract text from HTML
+function extractTextFromHTML(html) {
+  const tempDiv = document.createElement('div');
+  tempDiv.innerHTML = html;
+  
+  // Remove script and style elements
+  const scripts = tempDiv.querySelectorAll('script, style');
+  scripts.forEach(script => script.remove());
+  
+  // Get text content and clean it up
+  let text = tempDiv.textContent || tempDiv.innerText || '';
+  
+  // Clean up extra whitespace
+  text = text.replace(/\s+/g, ' ').trim();
+  
+  // Convert HTML entities back to text
+  text = text.replace(/&amp;/g, '&')
+             .replace(/&lt;/g, '<')
+             .replace(/&gt;/g, '>')
+             .replace(/&quot;/g, '"')
+             .replace(/&#39;/g, "'");
+  
+  return text;
+}

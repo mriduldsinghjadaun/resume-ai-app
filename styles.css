@@ -76,3 +76,79 @@ pre {
   border-radius: 6px;
   overflow-x: auto;
 }
+
+/* PDF Download Button Styling */
+#download-pdf {
+  background-color: #28a745;
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  margin: 20px 0;
+  transition: all 0.3s ease;
+  display: inline-block;
+  text-decoration: none;
+}
+
+#download-pdf:hover {
+  background-color: #218838;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+#download-pdf:active {
+  transform: translateY(0);
+}
+
+/* Resume output styling for better PDF formatting */
+#resume-output, #cover-output {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+  margin: 10px 0;
+  line-height: 1.6;
+}
+
+#resume-output h3, #cover-output h3 {
+  color: #2c3e50;
+  border-bottom: 2px solid #007bff;
+  padding-bottom: 5px;
+  margin-bottom: 15px;
+}
+
+#resume-output h4, #cover-output h4 {
+  color: #34495e;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+#resume-output .tag {
+  background-color: #e3f2fd;
+  color: #1976d2;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 0.9em;
+  margin-right: 5px;
+  display: inline-block;
+}
+
+#resume-output .exp {
+  margin-bottom: 15px;
+  padding: 10px;
+  background-color: #f8f9fa;
+  border-left: 4px solid #007bff;
+  border-radius: 4px;
+}
+
+#resume-output ul {
+  margin: 10px 0;
+  padding-left: 20px;
+}
+
+#resume-output li {
+  margin-bottom: 5px;
+}
