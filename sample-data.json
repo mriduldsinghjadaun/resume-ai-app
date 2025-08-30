@@ -1,0 +1,244 @@
+{
+  "sample_fresher_data": {
+    "personal_info": {
+      "name": "Sarah Johnson",
+      "email": "sarah.johnson@email.com",
+      "phone": "+1 (555) 123-4567",
+      "location": "San Francisco, CA",
+      "linkedin": "https://www.linkedin.com/in/sarah-johnson-dev",
+      "github": "https://github.com/sarahjohnson",
+      "portfolio": "https://sarahjohnson.dev"
+    },
+    "candidate_type": "fresher",
+    "target_role": {
+      "position": "Frontend Developer",
+      "industry": "Technology",
+      "key_skills": ["JavaScript", "React", "CSS", "HTML", "Node.js"]
+    },
+    "professional_summary": {
+      "years_experience": 0,
+      "key_achievements": [
+        {
+          "X": "University capstone project requiring full-stack web application development",
+          "Y": "Developed e-commerce platform using React, Node.js, and MongoDB with responsive design",
+          "Z": "Achieved 95% test coverage, 2-second page load time, and won Best Project Award"
+        }
+      ],
+      "core_competencies": ["JavaScript", "React", "Node.js", "MongoDB", "Responsive Design"]
+    },
+    "education": [
+      {
+        "degree": "Bachelor of Science",
+        "major": "Computer Science",
+        "institution": "University of California, Berkeley",
+        "location": "Berkeley, CA",
+        "graduation_date": "May 2024",
+        "gpa": 3.8,
+        "honors": ["Dean's List", "Magna Cum Laude"],
+        "relevant_coursework": ["Data Structures", "Algorithms", "Database Systems", "Software Engineering", "Web Development"],
+        "academic_projects": [
+          {
+            "name": "E-commerce Platform",
+            "X": "Course capstone project requiring full-stack web application",
+            "Y": "Developed using React, Node.js, MongoDB, and deployed on AWS",
+            "Z": "Achieved 95% test coverage and 2-second page load time"
+          }
+        ]
+      }
+    ],
+    "projects": [
+      {
+        "name": "Task Management App",
+        "description": "A collaborative task management application with real-time updates",
+        "technologies": ["React", "Node.js", "Socket.io", "MongoDB"],
+        "duration": "3 months",
+        "team_size": 3,
+        "achievements": [
+          {
+            "X": "Team project requiring real-time collaboration features",
+            "Y": "Implemented WebSocket connections and responsive UI with React",
+            "Z": "Achieved 100+ concurrent users and 99.9% uptime"
+          }
+        ],
+        "github_link": "https://github.com/sarahjohnson/task-manager",
+        "live_demo": "https://taskmanager-demo.herokuapp.com"
+      },
+      {
+        "name": "Weather Dashboard",
+        "description": "Interactive weather dashboard with location-based forecasts",
+        "technologies": ["JavaScript", "HTML5", "CSS3", "OpenWeather API"],
+        "duration": "1 month",
+        "team_size": 1,
+        "achievements": [
+          {
+            "X": "Personal project to learn API integration and data visualization",
+            "Y": "Built responsive dashboard with Chart.js and geolocation features",
+            "Z": "Achieved 4.8/5 user rating and 1000+ daily active users"
+          }
+        ],
+        "github_link": "https://github.com/sarahjohnson/weather-dashboard",
+        "live_demo": "https://weather-dashboard-demo.netlify.app"
+      }
+    ],
+    "certifications": [
+      {
+        "name": "AWS Certified Cloud Practitioner",
+        "issuing_organization": "Amazon Web Services",
+        "date_obtained": "March 2024",
+        "expiration_date": "March 2027",
+        "credential_id": "AWS-CCP-123456"
+      },
+      {
+        "name": "React Developer Certification",
+        "issuing_organization": "Meta",
+        "date_obtained": "January 2024",
+        "expiration_date": null,
+        "credential_id": "META-REACT-789012"
+      }
+    ],
+    "additional_sections": {
+      "technical_skills": {
+        "programming_languages": ["JavaScript", "Python", "Java", "HTML5", "CSS3"],
+        "frameworks": ["React", "Node.js", "Express", "Bootstrap", "Tailwind CSS"],
+        "databases": ["MongoDB", "MySQL", "PostgreSQL"],
+        "tools": ["Git", "Docker", "VS Code", "Postman", "Figma"],
+        "cloud_platforms": ["AWS", "Heroku", "Netlify", "Vercel"]
+      }
+    },
+    "applied_job_title": "Junior Frontend Developer",
+    "applied_company": "TechCorp Inc.",
+    "job_description": "We are looking for a passionate Junior Frontend Developer to join our team. The ideal candidate will have experience with React, JavaScript, and modern web development practices. Responsibilities include developing user-facing features, optimizing applications for speed and scalability, and collaborating with cross-functional teams."
+  },
+  "sample_experienced_data": {
+    "personal_info": {
+      "name": "Michael Chen",
+      "email": "michael.chen@email.com",
+      "phone": "+1 (555) 987-6543",
+      "location": "Seattle, WA",
+      "linkedin": "https://www.linkedin.com/in/michael-chen-dev",
+      "github": "https://github.com/michaelchen",
+      "portfolio": "https://michaelchen.dev"
+    },
+    "candidate_type": "experienced",
+    "target_role": {
+      "position": "Senior Full Stack Developer",
+      "industry": "Technology",
+      "key_skills": ["JavaScript", "React", "Node.js", "Python", "AWS", "Docker"]
+    },
+    "professional_summary": {
+      "years_experience": 5,
+      "key_achievements": [
+        {
+          "X": "Legacy system causing 40% performance bottlenecks affecting customer satisfaction",
+          "Y": "Led cross-functional team to redesign architecture using microservices and containerization",
+          "Z": "Improved system performance by 60% and reduced customer complaints by 80%"
+        }
+      ],
+      "core_competencies": ["Full Stack Development", "System Architecture", "Team Leadership", "Cloud Computing", "DevOps"]
+    },
+    "experience": [
+      {
+        "organization": "TechCorp Inc.",
+        "position": "Senior Software Engineer",
+        "location": "Seattle, WA",
+        "start_date": "January 2022",
+        "end_date": "Present",
+        "achievements": [
+          {
+            "X": "Legacy monolithic application causing scalability issues and slow deployment cycles",
+            "Y": "Architected and implemented microservices architecture with Docker and Kubernetes",
+            "Z": "Reduced deployment time by 75% and improved system scalability by 300%"
+          },
+          {
+            "X": "Development team lacking standardized processes leading to inconsistent code quality",
+            "Y": "Established CI/CD pipelines, code review processes, and automated testing frameworks",
+            "Z": "Increased code quality by 40% and reduced production bugs by 60%"
+          },
+          {
+            "X": "Customer onboarding process taking 2+ weeks due to manual steps",
+            "Y": "Developed automated onboarding system with React frontend and Node.js backend",
+            "Z": "Reduced onboarding time to 2 days and improved customer satisfaction by 45%"
+          }
+        ]
+      },
+      {
+        "organization": "StartupXYZ",
+        "position": "Full Stack Developer",
+        "location": "San Francisco, CA",
+        "start_date": "June 2020",
+        "end_date": "December 2021",
+        "achievements": [
+          {
+            "X": "Startup needed to quickly build and scale a SaaS platform",
+            "Y": "Developed full-stack application using React, Node.js, and PostgreSQL",
+            "Z": "Achieved 10,000+ active users and $500K ARR within 18 months"
+          },
+          {
+            "X": "Database performance issues causing slow query response times",
+            "Y": "Optimized database queries and implemented Redis caching layer",
+            "Z": "Improved query performance by 80% and reduced server costs by 30%"
+          }
+        ]
+      }
+    ],
+    "projects": [
+      {
+        "name": "Open Source Analytics Dashboard",
+        "description": "Real-time analytics dashboard for monitoring application performance",
+        "technologies": ["React", "D3.js", "Node.js", "WebSocket", "MongoDB"],
+        "duration": "6 months",
+        "team_size": 4,
+        "achievements": [
+          {
+            "X": "Need for real-time monitoring solution for distributed applications",
+            "Y": "Built dashboard with WebSocket connections and interactive data visualizations",
+            "Z": "Achieved 1M+ GitHub stars and 50,000+ downloads"
+          }
+        ],
+        "github_link": "https://github.com/michaelchen/analytics-dashboard",
+        "live_demo": "https://analytics-dashboard-demo.com"
+      }
+    ],
+    "education": [
+      {
+        "degree": "Master of Science",
+        "major": "Computer Science",
+        "institution": "Stanford University",
+        "location": "Stanford, CA",
+        "graduation_date": "June 2020",
+        "gpa": 3.9,
+        "honors": ["Summa Cum Laude", "Phi Beta Kappa"],
+        "relevant_coursework": [],
+        "academic_projects": []
+      }
+    ],
+    "certifications": [
+      {
+        "name": "AWS Certified Solutions Architect",
+        "issuing_organization": "Amazon Web Services",
+        "date_obtained": "August 2023",
+        "expiration_date": "August 2026",
+        "credential_id": "AWS-SAA-345678"
+      },
+      {
+        "name": "Certified Kubernetes Administrator",
+        "issuing_organization": "Cloud Native Computing Foundation",
+        "date_obtained": "May 2023",
+        "expiration_date": "May 2026",
+        "credential_id": "CKA-901234"
+      }
+    ],
+    "additional_sections": {
+      "technical_skills": {
+        "programming_languages": ["JavaScript", "Python", "Java", "TypeScript", "Go"],
+        "frameworks": ["React", "Node.js", "Express", "Django", "Spring Boot"],
+        "databases": ["PostgreSQL", "MongoDB", "Redis", "MySQL"],
+        "tools": ["Docker", "Kubernetes", "Jenkins", "Git", "Terraform"],
+        "cloud_platforms": ["AWS", "Google Cloud", "Azure"]
+      }
+    },
+    "applied_job_title": "Senior Full Stack Developer",
+    "applied_company": "Innovation Labs",
+    "job_description": "We are seeking a Senior Full Stack Developer with 5+ years of experience to lead our development team. The ideal candidate will have expertise in React, Node.js, cloud platforms, and experience with microservices architecture. You will be responsible for designing scalable systems, mentoring junior developers, and driving technical decisions."
+  }
+}

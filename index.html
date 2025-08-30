@@ -3,126 +3,478 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>AI Resume & Cover Letter Generator</title>
+  <title>XYZ Resume Generator - ATS-Optimized Professional Resumes</title>
   <link rel="stylesheet" href="styles.css" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
   <div class="container">
-    <h1>AI Resume & Cover Letter Generator</h1>
+    <header class="header">
+      <h1><i class="fas fa-file-alt"></i> XYZ Resume Generator</h1>
+      <p class="subtitle">Create ATS-friendly resumes using the proven XYZ methodology</p>
+      <div class="xyz-explanation">
+        <h3>XYZ Methodology</h3>
+        <div class="xyz-grid">
+          <div class="xyz-item">
+            <strong>X</strong> = Situation/Task
+          </div>
+          <div class="xyz-item">
+            <strong>Y</strong> = Action/Contribution
+          </div>
+          <div class="xyz-item">
+            <strong>Z</strong> = Results (quantified)
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="form-container">
+      <div class="form-tabs">
+        <button type="button" class="tab-button active" data-tab="personal">Personal Info</button>
+        <button type="button" class="tab-button" data-tab="candidate">Candidate Type</button>
+        <button type="button" class="tab-button" data-tab="experience">Experience</button>
+        <button type="button" class="tab-button" data-tab="projects">Projects</button>
+        <button type="button" class="tab-button" data-tab="education">Education</button>
+        <button type="button" class="tab-button" data-tab="skills">Skills & Certifications</button>
+        <button type="button" class="tab-button" data-tab="job">Job Targeting</button>
+      </div>
 
     <form id="resumeForm">
-      <!-- Basic contact -->
-      <label>Full Name</label>
+        <!-- Personal Information Tab -->
+        <div class="tab-content active" id="personal-tab">
+          <h3><i class="fas fa-user"></i> Personal Information</h3>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="name">Full Name *</label>
       <input type="text" id="name" required />
+            </div>
+            <div class="form-group">
+              <label for="email">Email *</label>
+              <input type="email" id="email" required />
+            </div>
+          </div>
 
-      <label>Professional Headline (e.g. Frontend Developer)</label>
-      <input type="text" id="headline" placeholder="e.g. Frontend Developer" />
+          <div class="form-row">
+            <div class="form-group">
+              <label for="phone">Phone</label>
+              <input type="text" id="phone" />
+            </div>
+            <div class="form-group">
+              <label for="location">Location</label>
+              <input type="text" id="location" placeholder="City, State/Country" />
+            </div>
+          </div>
 
-      <label>Short Summary / About (1-2 lines)</label>
-      <textarea id="summary" placeholder="A short professional summary"></textarea>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="linkedin">LinkedIn URL</label>
+              <input type="text" id="linkedin" placeholder="https://www.linkedin.com/in/..." />
+            </div>
+            <div class="form-group">
+              <label for="github">GitHub URL</label>
+              <input type="text" id="github" placeholder="https://github.com/..." />
+            </div>
+          </div>
 
+          <div class="form-group">
+            <label for="portfolio">Portfolio URL</label>
+            <input type="text" id="portfolio" placeholder="https://..." />
+          </div>
+        </div>
+
+        <!-- Candidate Type Tab -->
+        <div class="tab-content" id="candidate-tab">
+          <h3><i class="fas fa-user-tie"></i> Candidate Type & Target Role</h3>
+          
+          <div class="form-group">
+            <label for="candidate_type">Candidate Type *</label>
+            <select id="candidate_type" required>
+              <option value="">Select your experience level</option>
+              <option value="fresher">Fresher/Entry Level (0-2 years)</option>
+              <option value="experienced">Experienced Professional (2+ years)</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="target_position">Target Position *</label>
+              <input type="text" id="target_position" placeholder="e.g. Frontend Developer" required />
+            </div>
+            <div class="form-group">
+              <label for="target_industry">Industry</label>
+              <input type="text" id="target_industry" placeholder="e.g. Technology, Finance, Healthcare" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="years_experience">Years of Experience</label>
+            <input type="number" id="years_experience" min="0" max="50" placeholder="0" />
+          </div>
+
+          <div class="form-group">
+            <label for="core_competencies">Core Competencies (comma separated)</label>
+            <textarea id="core_competencies" placeholder="e.g. JavaScript, React, Node.js, AWS, Agile Development"></textarea>
+          </div>
+        </div>
+
+        <!-- Experience Tab -->
+        <div class="tab-content" id="experience-tab">
+          <h3><i class="fas fa-briefcase"></i> Professional Experience</h3>
+          <p class="help-text">Use the XYZ methodology for each achievement. Focus on quantified results!</p>
+          
+          <div id="experience-container">
+            <div class="experience-block">
+              <h4>Experience 1</h4>
+              <div class="form-row">
+                <div class="form-group">
+                  <label>Organization</label>
+                  <input type="text" class="exp-organization" placeholder="Company name" />
+                </div>
+                <div class="form-group">
+                  <label>Position</label>
+                  <input type="text" class="exp-position" placeholder="Job title" />
+                </div>
+              </div>
+              
+              <div class="form-row">
+                <div class="form-group">
+                  <label>Location</label>
+                  <input type="text" class="exp-location" placeholder="City, State" />
+                </div>
+                <div class="form-group">
+                  <label>Start Date</label>
+                  <input type="text" class="exp-start-date" placeholder="Month Year" />
+                </div>
+                <div class="form-group">
+                  <label>End Date</label>
+                  <input type="text" class="exp-end-date" placeholder="Month Year or Present" />
+                </div>
+              </div>
+
+              <div class="achievements-section">
+                <h5>Key Achievements (XYZ Format)</h5>
+                <div class="achievement-block">
+                  <div class="xyz-inputs">
+                    <div class="xyz-input">
+                      <label>X - Situation/Task</label>
+                      <textarea class="xyz-situation" placeholder="Describe the situation or challenge you faced"></textarea>
+                    </div>
+                    <div class="xyz-input">
+                      <label>Y - Action/Contribution</label>
+                      <textarea class="xyz-action" placeholder="Describe the specific actions you took"></textarea>
+                    </div>
+                    <div class="xyz-input">
+                      <label>Z - Results (quantified)</label>
+                      <textarea class="xyz-result" placeholder="Describe the measurable results achieved"></textarea>
+                    </div>
+                  </div>
+                  <div class="xyz-preview">
+                    <strong>Preview:</strong>
+                    <div class="preview-text"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <button type="button" id="add-experience" class="add-button">
+            <i class="fas fa-plus"></i> Add Another Experience
+          </button>
+        </div>
+
+        <!-- Projects Tab -->
+        <div class="tab-content" id="projects-tab">
+          <h3><i class="fas fa-code"></i> Projects</h3>
+          <p class="help-text">Highlight your most impactful projects using XYZ methodology</p>
+          
+          <div id="projects-container">
+            <div class="project-block">
+              <h4>Project 1</h4>
+              <div class="form-row">
+                <div class="form-group">
+                  <label>Project Name</label>
+                  <input type="text" class="project-name" placeholder="Project title" />
+                </div>
+                <div class="form-group">
+                  <label>Technologies Used</label>
+                  <input type="text" class="project-technologies" placeholder="React, Node.js, MongoDB" />
+                </div>
+              </div>
+              
+              <div class="form-group">
+                <label>Project Description</label>
+                <textarea class="project-description" placeholder="Brief description of the project"></textarea>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label>Duration</label>
+                  <input type="text" class="project-duration" placeholder="e.g. 3 months" />
+                </div>
+                <div class="form-group">
+                  <label>Team Size</label>
+                  <input type="number" class="project-team-size" placeholder="1" min="1" />
+                </div>
+              </div>
+
+              <div class="achievements-section">
+                <h5>Project Achievements (XYZ Format)</h5>
+                <div class="achievement-block">
+                  <div class="xyz-inputs">
+                    <div class="xyz-input">
+                      <label>X - Project Scope/Challenge</label>
+                      <textarea class="xyz-situation" placeholder="Describe the project scope or problem solved"></textarea>
+                    </div>
+                    <div class="xyz-input">
+                      <label>Y - Implementation Approach</label>
+                      <textarea class="xyz-action" placeholder="Describe technologies and approach used"></textarea>
+                    </div>
+                    <div class="xyz-input">
+                      <label>Z - Measurable Impact</label>
+                      <textarea class="xyz-result" placeholder="Describe the measurable results or impact"></textarea>
+                    </div>
+                  </div>
+                  <div class="xyz-preview">
+                    <strong>Preview:</strong>
+                    <div class="preview-text"></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label>GitHub Link</label>
+                  <input type="text" class="project-github" placeholder="https://github.com/..." />
+                </div>
+                <div class="form-group">
+                  <label>Live Demo</label>
+                  <input type="text" class="project-demo" placeholder="https://..." />
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <button type="button" id="add-project" class="add-button">
+            <i class="fas fa-plus"></i> Add Another Project
+          </button>
+        </div>
+
+        <!-- Education Tab -->
+        <div class="tab-content" id="education-tab">
+          <h3><i class="fas fa-graduation-cap"></i> Education</h3>
+          
+          <div id="education-container">
+            <div class="education-block">
+              <h4>Education 1</h4>
+              <div class="form-row">
+                <div class="form-group">
+                  <label>Degree</label>
+                  <input type="text" class="edu-degree" placeholder="e.g. Bachelor of Technology" />
+                </div>
+                <div class="form-group">
+                  <label>Major/Field</label>
+                  <input type="text" class="edu-major" placeholder="e.g. Computer Science" />
+                </div>
+              </div>
+              
+              <div class="form-row">
+                <div class="form-group">
+                  <label>Institution</label>
+                  <input type="text" class="edu-institution" placeholder="University name" />
+                </div>
+                <div class="form-group">
       <label>Location</label>
-      <input type="text" id="location" />
+                  <input type="text" class="edu-location" placeholder="City, State" />
+                </div>
+              </div>
 
-      <label>Email</label>
-      <input type="email" id="email" />
+              <div class="form-row">
+                <div class="form-group">
+                  <label>Graduation Date</label>
+                  <input type="text" class="edu-graduation-date" placeholder="Month Year" />
+                </div>
+                <div class="form-group">
+                  <label>GPA (optional)</label>
+                  <input type="number" class="edu-gpa" step="0.01" min="0" max="4" placeholder="3.5" />
+                </div>
+              </div>
 
-      <label>Phone</label>
-      <input type="text" id="phone" />
+              <div class="form-group">
+                <label>Honors/Achievements</label>
+                <textarea class="edu-honors" placeholder="Dean's List, Magna Cum Laude, etc."></textarea>
+              </div>
 
-      <label>LinkedIn URL</label>
-      <input type="text" id="linkedin" placeholder="https://www.linkedin.com/in/..." />
+              <div class="form-group">
+                <label>Relevant Coursework (for freshers)</label>
+                <textarea class="edu-coursework" placeholder="Data Structures, Algorithms, Database Systems, etc."></textarea>
+              </div>
+            </div>
+          </div>
+          
+          <button type="button" id="add-education" class="add-button">
+            <i class="fas fa-plus"></i> Add Another Education
+          </button>
+        </div>
 
-      <label>Portfolio / GitHub URL</label>
-      <input type="text" id="portfolio" placeholder="https://..." />
+        <!-- Skills & Certifications Tab -->
+        <div class="tab-content" id="skills-tab">
+          <h3><i class="fas fa-tools"></i> Skills & Certifications</h3>
+          
+          <div class="skills-section">
+            <h4>Technical Skills</h4>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Programming Languages</label>
+                <input type="text" id="programming-languages" placeholder="JavaScript, Python, Java, C++" />
+              </div>
+              <div class="form-group">
+                <label>Frameworks & Libraries</label>
+                <input type="text" id="frameworks" placeholder="React, Angular, Node.js, Express" />
+              </div>
+            </div>
+            
+            <div class="form-row">
+              <div class="form-group">
+                <label>Databases</label>
+                <input type="text" id="databases" placeholder="MySQL, MongoDB, PostgreSQL" />
+              </div>
+              <div class="form-group">
+                <label>Tools & Technologies</label>
+                <input type="text" id="tools" placeholder="Git, Docker, Jenkins, AWS" />
+              </div>
+            </div>
 
-      <label>Skills (comma separated)</label>
-      <input type="text" id="skills" placeholder="HTML, CSS, JavaScript, React" />
+            <div class="form-group">
+              <label>Cloud Platforms</label>
+              <input type="text" id="cloud-platforms" placeholder="AWS, Azure, Google Cloud" />
+            </div>
+          </div>
 
-      <label>Certifications (comma separated)</label>
-      <input type="text" id="certifications" placeholder="e.g. AWS Certified, Coursera..." />
+          <div class="certifications-section">
+            <h4>Certifications</h4>
+            <div id="certifications-container">
+              <div class="certification-block">
+                <div class="form-row">
+                  <div class="form-group">
+                    <label>Certification Name</label>
+                    <input type="text" class="cert-name" placeholder="AWS Certified Solutions Architect" />
+                  </div>
+                  <div class="form-group">
+                    <label>Issuing Organization</label>
+                    <input type="text" class="cert-organization" placeholder="Amazon Web Services" />
+                  </div>
+                </div>
+                
+                <div class="form-row">
+                  <div class="form-group">
+                    <label>Date Obtained</label>
+                    <input type="text" class="cert-date" placeholder="Month Year" />
+                  </div>
+                  <div class="form-group">
+                    <label>Expiration Date (optional)</label>
+                    <input type="text" class="cert-expiration" placeholder="Month Year" />
+                  </div>
+                </div>
 
-      <label>Achievements / Awards (one per line)</label>
-      <textarea id="achievements" placeholder="e.g. Increased traffic by 40%"></textarea>
-
-      <!-- Structured experiences (3 blocks) -->
-      <h3>Experience (add up to 3)</h3>
-
-      <div class="exp-block">
-        <label>Company 1</label>
-        <input type="text" id="company1" placeholder="Company name" />
-        <label>Role 1</label>
-        <input type="text" id="role1" placeholder="Role / Title" />
-        <label>Period 1</label>
-        <input type="text" id="period1" placeholder="e.g. Jun 2023 - Dec 2023" />
-        <label>Bullets 1 (one per line)</label>
-        <textarea id="bullets1" placeholder="Bullet 1\nBullet 2"></textarea>
+                <div class="form-group">
+                  <label>Credential ID (optional)</label>
+                  <input type="text" class="cert-credential-id" placeholder="Credential ID" />
+                </div>
+              </div>
       </div>
 
-      <div class="exp-block">
-        <label>Company 2</label>
-        <input type="text" id="company2" placeholder="Company name" />
-        <label>Role 2</label>
-        <input type="text" id="role2" placeholder="Role / Title" />
-        <label>Period 2</label>
-        <input type="text" id="period2" placeholder="e.g. Jan 2022 - May 2023" />
-        <label>Bullets 2 (one per line)</label>
-        <textarea id="bullets2" placeholder="Bullet 1\nBullet 2"></textarea>
+            <button type="button" id="add-certification" class="add-button">
+              <i class="fas fa-plus"></i> Add Another Certification
+            </button>
+          </div>
       </div>
 
-      <div class="exp-block">
-        <label>Company 3</label>
-        <input type="text" id="company3" placeholder="Company name" />
-        <label>Role 3</label>
-        <input type="text" id="role3" placeholder="Role / Title" />
-        <label>Period 3</label>
-        <input type="text" id="period3" placeholder="e.g. 2019 - 2021" />
-        <label>Bullets 3 (one per line)</label>
-        <textarea id="bullets3" placeholder="Bullet 1\nBullet 2"></textarea>
+        <!-- Job Targeting Tab -->
+        <div class="tab-content" id="job-tab">
+          <h3><i class="fas fa-bullseye"></i> Job Targeting & Optimization</h3>
+          
+          <div class="form-group">
+            <label for="applied_job_title">Job Title You're Applying For</label>
+            <input type="text" id="applied_job_title" placeholder="e.g. Senior Frontend Developer" />
       </div>
 
-      <!-- Education / Projects -->
-      <h3>Education & Projects</h3>
-      <label>Degree</label>
-      <input type="text" id="education_degree" placeholder="e.g. B.Tech CSE" />
-      <label>Institution</label>
-      <input type="text" id="education_institution" placeholder="e.g. DSMNRU" />
-      <label>Year / Period</label>
-      <input type="text" id="education_year" placeholder="e.g. 2022" />
+          <div class="form-group">
+            <label for="applied_company">Company Name</label>
+            <input type="text" id="applied_company" placeholder="e.g. Google, Microsoft, Startup Inc." />
+          </div>
 
-      <label>Project Title (optional)</label>
-      <input type="text" id="project_title" />
-      <label>Project Description</label>
-      <textarea id="project_desc" placeholder="Short project description, your role, tech used, impact"></textarea>
+          <div class="form-group">
+            <label for="job_description">Job Description (paste the full job posting)</label>
+            <textarea id="job_description" rows="8" placeholder="Paste the complete job description here for keyword optimization..."></textarea>
+          </div>
 
-      <!-- Job application fields (user may fill or we will auto-extract) -->
-      <h3>Job Application (optional)</h3>
-      <label>Job Title you're applying for (optional)</label>
-      <input type="text" id="applied_job_title" placeholder="e.g. Frontend Developer" />
-      <label>Company you're applying to (optional)</label>
-      <input type="text" id="applied_company" placeholder="e.g. Example Inc." />
-      <label>Full Job Description / Paste the ad (optional)</label>
-      <textarea id="jobdesc" placeholder="Paste the full job description or link"></textarea>
+          <div class="keyword-extraction">
+            <h4>Extracted Keywords</h4>
+            <div id="extracted-keywords" class="keyword-tags"></div>
+          </div>
+        </div>
 
-      <button type="submit">Generate</button>
+        <div class="form-actions">
+          <button type="button" id="prev-tab" class="nav-button">
+            <i class="fas fa-arrow-left"></i> Previous
+          </button>
+          <button type="button" id="next-tab" class="nav-button">
+            Next <i class="fas fa-arrow-right"></i>
+          </button>
+          <button type="submit" class="generate-button">
+            <i class="fas fa-magic"></i> Generate XYZ Resume
+          </button>
+        </div>
     </form>
-
-    <div id="loading" style="display:none; font-weight:bold; color:green; margin-top: 16px;">
-      ⏳ Generating resume...
     </div>
 
-    <div id="output" style="margin-top: 20px;">
-      <h2>Generated Resume</h2>
-      <div id="resume-output"></div>
+    <div id="loading" class="loading-container" style="display:none;">
+      <div class="loading-spinner">
+        <i class="fas fa-spinner fa-spin"></i>
+        <p>Generating your XYZ-optimized resume...</p>
+      </div>
+    </div>
 
-      <h2>Generated Cover Letter</h2>
-      <div id="cover-output"></div>
-     
-      <button id="download-pdf">Download PDF</button>
+    <div id="output" class="output-container" style="display:none;">
+      <div class="output-header">
+        <h2><i class="fas fa-file-alt"></i> Generated Resume</h2>
+        <div class="ats-score">
+          <span class="score-label">ATS Score:</span>
+          <span id="ats-score-value" class="score-value">0%</span>
+        </div>
+      </div>
+      
+      <div class="output-actions">
+        <button id="download-pdf" class="action-button">
+          <i class="fas fa-download"></i> Download PDF
+        </button>
+        <button id="download-markdown" class="action-button">
+          <i class="fas fa-file-code"></i> Download Markdown
+        </button>
+        <button id="copy-resume" class="action-button">
+          <i class="fas fa-copy"></i> Copy to Clipboard
+        </button>
+      </div>
+
+      <div class="resume-preview">
+        <div id="resume-output" class="resume-content"></div>
+      </div>
+
+      <div class="cover-letter-section">
+        <h3><i class="fas fa-envelope"></i> Generated Cover Letter</h3>
+        <div id="cover-output" class="cover-content"></div>
+      </div>
+    </div>
+
+    <div id="validation-errors" class="validation-container" style="display:none;">
+      <h3><i class="fas fa-exclamation-triangle"></i> Validation Errors</h3>
+      <ul id="error-list"></ul>
     </div>
   </div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="xyz-resume-engine.js"></script>
   <script src="main.js"></script>
 </body>
 </html>

@@ -7,85 +7,156 @@ export default async (req, res) => {
 
   const payload = req.body || {};
 
-  // deconstruct fields
+  // Extract data from the new XYZ structure
   const {
-    name,
-    headline,
-    summary,
-    location,
-    email,
-    phone,
-    linkedin,
-    portfolio,
-    skills,
-    certifications,
-    achievements,
+    personal_info,
+    candidate_type,
+    target_role,
+    professional_summary,
     experience,
-    education,
     projects,
+    education,
+    certifications,
+    additional_sections,
     applied_job_title,
     applied_company,
     job_description,
   } = payload;
 
-  // Build a comprehensive prompt for resume JSON + cover letter
+  // Build a comprehensive prompt for XYZ methodology resume
   const resumePrompt = `
-You are an expert resume writer and ATS optimizer. Given the user's inputs below, produce a JSON object (ONLY JSON, no commentary) with the structure:
+You are an expert resume writer specializing in the XYZ methodology for ATS-optimized resumes. 
+
+XYZ Methodology Rules:
+- X = Situation/Task (context or challenge)
+- Y = Action/Contribution (specific actions taken)
+- Z = Results (quantified outcomes)
+- No personal pronouns (I, me, my, we, our)
+- Use strong action verbs
+- Quantify results wherever possible
+- Phrase format, not full sentences
+
+Given the user's inputs below, produce a JSON object (ONLY JSON, no commentary) with the structure:
 
 {
   "headline": "...",
   "summary": "...",
-  "contact": { "location": "...", "email": "...", "phone": "...", "linkedin": "...", "portfolio": "..." },
-  "skills": ["..."],
-  "certifications": ["..."],
-  "achievements": ["..."],
+  "contact": { "location": "...", "email": "...", "phone": "...", "linkedin": "...", "github": "...", "portfolio": "..." },
+  "technical_skills": {
+    "programming_languages": ["..."],
+    "frameworks": ["..."],
+    "databases": ["..."],
+    "tools": ["..."],
+    "cloud_platforms": ["..."]
+  },
   "experience": [
-    { "company":"", "role":"", "period":"", "bullets":["",""] },
-    ...
-  ],
-  "education": [
-    { "degree":"", "institution":"", "year":"" }
+    { 
+      "company": "", 
+      "role": "", 
+      "location": "",
+      "start_date": "",
+      "end_date": "",
+      "achievements": [
+        {
+          "X": "situation/challenge",
+          "Y": "action taken", 
+          "Z": "quantified result"
+        }
+      ]
+    }
   ],
   "projects": [
-    { "title":"", "description":"" }
+    {
+      "name": "",
+      "description": "",
+      "technologies": ["..."],
+      "duration": "",
+      "team_size": 1,
+      "achievements": [
+        {
+          "X": "project scope/challenge",
+          "Y": "implementation approach",
+          "Z": "measurable impact"
+        }
+      ],
+      "github_link": "",
+      "live_demo": ""
+    }
+  ],
+  "education": [
+    {
+      "degree": "",
+      "major": "",
+      "institution": "",
+      "location": "",
+      "graduation_date": "",
+      "gpa": null,
+      "honors": ["..."],
+      "relevant_coursework": ["..."]
+    }
+  ],
+  "certifications": [
+    {
+      "name": "",
+      "issuing_organization": "",
+      "date_obtained": "",
+      "expiration_date": null,
+      "credential_id": null
+    }
   ],
   "keywords": ["..."],
-  "parsed_job_title": "",   // If job_description contains a job title, extract it, else use applied_job_title
-  "parsed_company": ""      // Extract company from job_description or use applied_company
+  "parsed_job_title": "",
+  "parsed_company": ""
 }
 
-Use the inputs below to fill fields. If a field is empty, leave it blank or an empty array. Tailor the summary and keywords to match the job_description if provided. If job_description is provided, extract the most probable job title and company name and put them into parsed_job_title and parsed_company. Make bullet points result-oriented and where possible include metrics or impact (if achievements or bullets provided). Keep language concise, ATS-friendly, and professional.
+Use the XYZ methodology for all achievements. Convert any existing bullet points to XYZ format. If job_description is provided, extract keywords and optimize content accordingly.
 
 User inputs:
-Name: ${name || ""}
-Headline: ${headline || ""}
-Summary: ${summary || ""}
-Location: ${location || ""}
-Email: ${email || ""}
-Phone: ${phone || ""}
-LinkedIn: ${linkedin || ""}
-Portfolio: ${portfolio || ""}
-Skills: ${(skills && skills.join ? skills.join(", ") : (skills || ""))}
-Certifications: ${(certifications && certifications.join ? certifications.join(", ") : (certifications || ""))}
-Achievements: ${(achievements && achievements.join ? achievements.join("; ") : (achievements || ""))}
+Personal Info: ${JSON.stringify(personal_info || {})}
+Candidate Type: ${candidate_type || ""}
+Target Role: ${JSON.stringify(target_role || {})}
+Professional Summary: ${JSON.stringify(professional_summary || {})}
 Experience: ${JSON.stringify(experience || [])}
-Education: ${JSON.stringify(education || [])}
 Projects: ${JSON.stringify(projects || [])}
-Applied Job Title (from user): ${applied_job_title || ""}
-Applied Company (from user): ${applied_company || ""}
+Education: ${JSON.stringify(education || [])}
+Certifications: ${JSON.stringify(certifications || [])}
+Technical Skills: ${JSON.stringify(additional_sections?.technical_skills || {})}
+Applied Job Title: ${applied_job_title || ""}
+Applied Company: ${applied_company || ""}
 Job Description: ${job_description || ""}
 
 Return ONLY the JSON object described above (no markdown, no backticks).
 `;
 
   const coverPrompt = `
-You are an expert cover letter writer. Based on the resume information (the same user inputs) produce a tailored cover letter and return a JSON object only:
+You are an expert cover letter writer specializing in creating compelling cover letters that complement XYZ methodology resumes. Based on the resume information below, produce a tailored cover letter and return a JSON object only:
 
 {
   "cover_letter": "..."
 }
 
-Make the cover letter about 180-230 words, address the hiring manager (use the company name if parsed_company is available), mention 2-3 key strengths from the user's skills/experience, and include a closing call to action. Use parsed_job_title (extracted) to mention the target role. Return ONLY this JSON.
+Cover Letter Requirements:
+- 180-230 words
+- Address the hiring manager (use company name if available)
+- Mention 2-3 key strengths using XYZ methodology principles
+- Reference specific achievements with quantified results
+- Include a strong closing call to action
+- Use the target role and company information
+- Professional, confident tone
+- ATS-friendly language
+
+Resume Information:
+Personal Info: ${JSON.stringify(personal_info || {})}
+Candidate Type: ${candidate_type || ""}
+Target Role: ${JSON.stringify(target_role || {})}
+Professional Summary: ${JSON.stringify(professional_summary || {})}
+Experience: ${JSON.stringify(experience || [])}
+Projects: ${JSON.stringify(projects || [])}
+Applied Job Title: ${applied_job_title || ""}
+Applied Company: ${applied_company || ""}
+Job Description: ${job_description || ""}
+
+Return ONLY the JSON object with the cover_letter field (no markdown, no backticks).
 `;
 
   try {
@@ -117,7 +188,7 @@ Make the cover letter about 180-230 words, address the hiring manager (use the c
       },
       body: JSON.stringify({
         model: "llama3-70b-8192",
-        messages: [{ role: "user", content: coverPrompt + "\n\nUser inputs:\n" + JSON.stringify(payload) }],
+        messages: [{ role: "user", content: coverPrompt }],
         max_tokens: 800,
         temperature: 0.25,
       }),
