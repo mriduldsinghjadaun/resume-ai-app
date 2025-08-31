@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Resume Generator</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <h1><i class="fas fa-file-alt"></i> Resume Generator</h1>
+      <nav>
+        <a href="/cover-letter" class="nav-link">Go to Cover Letter</a>
+      </nav>
+    </header>
+
+    <main>
+      <form id="resumeForm" novalidate>
+        <!-- Form fields similar to index.html, but focused on resume -->
+        <div class="form-group">
+          <label for="name">Full Name *</label>
+          <input type="text" id="name" name="name" required />
+        </div>
+        <div class="form-group">
+          <label for="jobTitle">Job Title *</label>
+          <input type="text" id="jobTitle" name="jobTitle" required />
+        </div>
+        <div class="form-group">
+          <label for="skills">Skills *</label>
+          <input type="text" id="skills" name="skills" placeholder="e.g. JavaScript, React, Node.js" required />
+        </div>
+        <div class="form-group">
+          <label for="experience">Experience *</label>
+          <textarea id="experience" name="experience" rows="5" placeholder="Briefly describe your experience" required></textarea>
+        </div>
+        <div class="form-group">
+          <label for="education">Education *</label>
+          <textarea id="education" name="education" rows="3" placeholder="Briefly describe your education" required></textarea>
+        </div>
+        <div class="form-actions">
+          <button type="submit" class="generate-button">
+            <i class="fas fa-magic"></i> Generate Resume
+          </button>
+        </div>
+      </form>
+
+      <div id="loading" class="loading-container" style="display:none;">
+        <div class="loading-spinner">
+          <i class="fas fa-spinner fa-spin"></i>
+          <p>Generating your resume...</p>
+        </div>
+      </div>
+
+      <div id="output" class="output-container" style="display:none;">
+        <h2><i class="fas fa-file-alt"></i> Generated Resume</h2>
+        <div id="resumeOutput" class="resume-content"></div>
+      </div>
+
+      <div id="validation-errors" class="validation-container" style="display:none;">
+        <h3><i class="fas fa-exclamation-triangle"></i> Validation Errors</h3>
+        <ul id="error-list"></ul>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    const form = document.getElementById('resumeForm');
+    const loading = document.getElementById('loading');
+    const output = document.getElementById('output');
+    const resumeOutput = document.getElementById('resumeOutput');
+    const validationErrors = document.getElementById('validation-errors');
+    const errorList = document.getElementById('error-list');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      validationErrors.style.display = 'none';
+      errorList.innerHTML = '';
+
+      const name = form.name.value.trim();
+      const jobTitle = form.jobTitle.value.trim();
+      const skills = form.skills.value.trim();
+      const experience = form.experience.value.trim();
+      const education = form.education.value.trim();
+
+      const errors = [];
+      if (!name) errors.push('Name is required.');
+      if (!jobTitle) errors.push('Job Title is required.');
+      if (!skills) errors.push('Skills is required.');
+      if (!experience) errors.push('Experience is required.');
+      if (!education) errors.push('Education is required.');
+
+      if (errors.length > 0) {
+        validationErrors.style.display = 'block';
+        errors.forEach(err => {
+          const li = document.createElement('li');
+          li.textContent = err;
+          errorList.appendChild(li);
+        });
+        return;
+      }
+
+      loading.style.display = 'block';
+      output.style.display = 'none';
+
+      try {
+        const response = await fetch('/api/generate-resume-new', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name, jobTitle, skills, experience, education }),
+        });
+
+        if (!response.ok) {
+          throw new Error('Failed to generate resume');
+        }
+
+        const data = await response.json();
+        resumeOutput.textContent = data.resume || 'No resume generated.';
+        output.style.display = 'block';
+      } catch (error) {
+        validationErrors.style.display = 'block';
+        errorList.innerHTML = `<li>${error.message}</li>`;
+      } finally {
+        loading.style.display = 'none';
+      }
+    });
+  </script>
+</body>
+</html>

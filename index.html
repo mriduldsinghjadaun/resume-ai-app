@@ -11,6 +11,10 @@
   <div class="container">
     <header class="header">
       <h1><i class="fas fa-file-alt"></i> XYZ Resume Generator</h1>
+      <nav>
+        <a href="/resume" class="nav-link">Go to Resume</a>
+        <a href="/cover-letter" class="nav-link">Go to Cover Letter</a>
+      </nav>
       <p class="subtitle">Create ATS-friendly resumes using the proven XYZ methodology</p>
       <div class="xyz-explanation">
         <h3>XYZ Methodology</h3>
@@ -39,7 +43,7 @@
         <button type="button" class="tab-button" data-tab="job">Job Targeting</button>
       </div>
 
-    <form id="resumeForm">
+    <form id="resumeForm" novalidate>
         <!-- Personal Information Tab -->
         <div class="tab-content active" id="personal-tab">
           <h3><i class="fas fa-user"></i> Personal Information</h3>
@@ -47,7 +51,7 @@
           <div class="form-row">
             <div class="form-group">
               <label for="name">Full Name *</label>
-      <input type="text" id="name" name="name" required />
+      <input type="text" id="name" name="name" />
             </div>
             <div class="form-group">
               <label for="email">Email *</label>
@@ -89,7 +93,7 @@
           
           <div class="form-group">
             <label for="candidate_type">Candidate Type *</label>
-            <select id="candidate_type" name="candidate_type" required>
+            <select id="candidate_type" name="candidate_type">
               <option value="">Select your experience level</option>
               <option value="fresher">Fresher/Entry Level (0-2 years)</option>
               <option value="experienced">Experienced Professional (2+ years)</option>
@@ -99,7 +103,7 @@
           <div class="form-row">
             <div class="form-group">
               <label for="target_position">Target Position *</label>
-              <input type="text" id="target_position" name="target_position" placeholder="e.g. Frontend Developer" required />
+              <input type="text" id="target_position" name="target_position" placeholder="e.g. Frontend Developer" />
             </div>
             <div class="form-group">
               <label for="target_industry">Industry</label>

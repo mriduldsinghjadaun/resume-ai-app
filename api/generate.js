@@ -205,3 +205,11 @@ Return ONLY the JSON object with the cover_letter field (no markdown, no backtic
     res.status(500).json({ error: "Groq API call failed", details: err.message });
   }
 };
+
+
+
+
+
+
+
+

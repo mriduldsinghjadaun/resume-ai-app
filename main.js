@@ -22,15 +22,6 @@ class XYZResumeApp {
     const coverOutput = document.getElementById("cover-output");
 
     form.addEventListener("submit", (e) => this.handleFormSubmit(e));
-    
-    // Tab navigation
-    document.querySelectorAll('.tab-button').forEach(button => {
-      button.addEventListener('click', (e) => this.switchTab(e.target.dataset.tab));
-    });
-
-    // Navigation buttons
-    document.getElementById('prev-tab').addEventListener('click', () => this.previousTab());
-    document.getElementById('next-tab').addEventListener('click', () => this.nextTab());
 
     // Dynamic form additions
     document.getElementById('add-experience').addEventListener('click', () => this.addExperienceBlock());
@@ -46,6 +37,7 @@ class XYZResumeApp {
 
   setupTabNavigation() {
     this.updateTabButtons();
+    this.setupTabValidation();
   }
 
   switchTab(tabName) {
@@ -68,6 +60,9 @@ class XYZResumeApp {
     // Update current tab index
     this.currentTab = this.tabs.indexOf(tabName);
     this.updateTabButtons();
+    
+    // Update required attributes based on tab visibility
+    this.updateRequiredAttributes();
   }
 
   previousTab() {
@@ -88,6 +83,181 @@ class XYZResumeApp {
     
     prevButton.style.display = this.currentTab === 0 ? 'none' : 'flex';
     nextButton.style.display = this.currentTab === this.tabs.length - 1 ? 'none' : 'flex';
+  }
+
+  setupTabValidation() {
+    // Add event listeners to tab buttons
+    document.querySelectorAll('.tab-button').forEach(button => {
+      button.addEventListener('click', (e) => {
+        e.preventDefault();
+        const tabName = button.getAttribute('data-tab');
+        this.switchTab(tabName);
+      });
+    });
+
+    // Add event listeners to navigation buttons
+    document.getElementById('prev-tab').addEventListener('click', (e) => {
+      e.preventDefault();
+      this.previousTab();
+    });
+
+    document.getElementById('next-tab').addEventListener('click', (e) => {
+      e.preventDefault();
+      this.nextTab();
+    });
+
+    // Initial setup of required attributes
+    this.updateRequiredAttributes();
+  }
+
+  updateRequiredAttributes() {
+    // Get all form elements that should be validated
+    const allFormElements = document.querySelectorAll('input[name], select[name], textarea[name]');
+
+    allFormElements.forEach(element => {
+      const tabContent = element.closest('.tab-content');
+      const isVisible = tabContent && tabContent.classList.contains('active');
+
+      // Define which fields should be required based on tab
+      const shouldBeRequired = this.shouldFieldBeRequired(element, tabContent);
+
+      if (isVisible && shouldBeRequired) {
+        // Element is visible and should be required, ensure it has required attribute
+        if (!element.hasAttribute('required')) {
+          element.setAttribute('required', 'required');
+        }
+      } else {
+        // Element is hidden or shouldn't be required, remove required attribute to prevent validation errors
+        element.removeAttribute('required');
+      }
+    });
+  }
+
+  shouldFieldBeRequired(element, tabContent) {
+    if (!tabContent) return false;
+
+    const tabId = tabContent.id;
+    const fieldName = element.name;
+
+    // Define required fields for each tab
+    const requiredFieldsByTab = {
+      'personal-tab': ['name', 'email'],
+      'candidate-tab': ['candidate_type', 'target_position'],
+      // Add more tabs and their required fields as needed
+    };
+
+    return requiredFieldsByTab[tabId]?.includes(fieldName) || false;
+  }
+
+  validateCurrentTab() {
+    const currentTabContent = document.querySelector('.tab-content.active');
+    if (!currentTabContent) return true;
+
+    const requiredElements = currentTabContent.querySelectorAll('input[required], select[required], textarea[required]');
+    let isValid = true;
+    const errors = [];
+
+    requiredElements.forEach(element => {
+      if (!element.value.trim()) {
+        isValid = false;
+        const label = currentTabContent.querySelector(`label[for="${element.id}"]`);
+        const fieldName = label ? label.textContent.replace('*', '').trim() : element.name;
+        errors.push(`${fieldName} is required`);
+        
+        // Add visual feedback
+        element.style.borderColor = '#dc3545';
+        element.addEventListener('input', () => {
+          element.style.borderColor = '';
+        }, { once: true });
+      }
+    });
+
+    if (!isValid) {
+      this.showValidationErrors(errors);
+    }
+
+    return isValid;
+  }
+
+  showValidationErrors(errors) {
+    const errorContainer = document.getElementById('validation-errors');
+    const errorList = document.getElementById('error-list');
+    
+    if (errorContainer && errorList) {
+      errorList.innerHTML = errors.map(error => `<li>${error}</li>`).join('');
+      errorContainer.style.display = 'block';
+      
+      // Scroll to error container
+      errorContainer.scrollIntoView({ behavior: 'smooth' });
+      
+      // Hide after 5 seconds
+      setTimeout(() => {
+        errorContainer.style.display = 'none';
+      }, 5000);
+    }
+  }
+
+  validateAllTabs() {
+    // Define tabs that have required fields
+    const tabsWithRequiredFields = [
+      { id: 'personal-tab', name: 'Personal' },
+      { id: 'candidate-tab', name: 'Candidate' }
+    ];
+
+    let allValid = true;
+    const allErrors = [];
+    let firstErrorTab = null;
+
+    // Validate each tab without changing visibility
+    tabsWithRequiredFields.forEach(tabInfo => {
+      const tabContent = document.getElementById(tabInfo.id);
+      if (!tabContent) return;
+
+      const tabErrors = this.validateTabFields(tabContent, tabInfo.name);
+
+      if (tabErrors.length > 0) {
+        allValid = false;
+        if (!firstErrorTab) firstErrorTab = tabInfo.id.replace('-tab', '');
+
+        allErrors.push(`<strong>${tabInfo.name} Tab:</strong>`);
+        allErrors.push(...tabErrors.map(error => `&nbsp;&nbsp;• ${error}`));
+      }
+    });
+
+    if (!allValid) {
+      this.showValidationErrors(allErrors);
+
+      // Switch to the first tab with errors
+      if (firstErrorTab) {
+        this.switchTab(firstErrorTab);
+      }
+    }
+
+    return allValid;
+  }
+
+  validateTabFields(tabContent, tabName) {
+    const errors = [];
+    const allFormElements = tabContent.querySelectorAll('input[name], select[name], textarea[name]');
+
+    allFormElements.forEach(element => {
+      // Check if this field should be required for this tab
+      if (this.shouldFieldBeRequired(element, tabContent)) {
+        if (!element.value.trim()) {
+          const label = tabContent.querySelector(`label[for="${element.id}"]`);
+          const fieldName = label ? label.textContent.replace('*', '').trim() : element.name;
+          errors.push(`${fieldName} is required`);
+
+          // Add visual feedback
+          element.style.borderColor = '#dc3545';
+          element.addEventListener('input', () => {
+            element.style.borderColor = '';
+          }, { once: true });
+        }
+      }
+    });
+
+    return errors;
   }
 
   setupXYZPreview() {
@@ -551,6 +721,11 @@ class XYZResumeApp {
     outputContainer.style.display = 'none';
     validationContainer.style.display = 'none';
     
+    // Validate all tabs before proceeding
+    if (!this.validateAllTabs()) {
+      return;
+    }
+    
     // Show loading
     loading.style.display = "block";
     resumeOutput.innerHTML = "";
@@ -789,28 +964,49 @@ class XYZResumeApp {
   }
 
   async generateCoverLetter(formData) {
+    // Validate required fields for cover letter generation
+    const requiredFields = [
+      { value: formData.personal_info.name, name: "Name" },
+      { value: formData.applied_job_title, name: "Job Title" },
+      { value: formData.applied_company, name: "Company" },
+      { value: formData.professional_summary.core_competencies, name: "Skills" },
+      { value: formData.professional_summary.years_experience, name: "Experience" }
+    ];
+
+    const missingFields = requiredFields.filter(field => {
+      if (Array.isArray(field.value)) {
+        return field.value.length === 0;
+      }
+      return !field.value || field.value.toString().trim() === "";
+    });
+
+    if (missingFields.length > 0) {
+      const coverOutput = document.getElementById("cover-output");
+      coverOutput.innerHTML = `<div class="error-message">❌ Missing required fields for cover letter: ${missingFields.map(f => f.name).join(", ")}</div>`;
+      return;
+    }
+
     try {
-      const response = await fetch("/api/generate", {
+      const response = await fetch("http://localhost:4000/api/generate-cover-letter", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          name: formData.personal_info.name,
+          jobTitle: formData.applied_job_title,
+          company: formData.applied_company,
+          skills: formData.professional_summary.core_competencies.join(', '),
+          experience: formData.professional_summary.years_experience
+        }),
       });
 
-      const text = await response.text();
-      
       if (!response.ok) {
-        throw new Error(`Server returned ${response.status}: ${text}`);
+        throw new Error(`Server returned ${response.status}`);
       }
 
-      const json = JSON.parse(text);
+      const json = await response.json();
       const coverOutput = document.getElementById("cover-output");
-      
-      try {
-        const coverParsed = JSON.parse(json.cover_raw);
-        coverOutput.innerHTML = `<div class="cover-letter">${this.escapeHtml(coverParsed.cover_letter || JSON.stringify(coverParsed))}</div>`;
-      } catch (e) {
-        coverOutput.innerHTML = `<div class="cover-letter">${this.escapeHtml(json.cover_raw || "")}</div>`;
-      }
+
+      coverOutput.innerHTML = `<div class="cover-letter">${this.escapeHtml(json.coverLetter)}</div>`;
 
     } catch (err) {
       console.error("Error generating cover letter:", err);

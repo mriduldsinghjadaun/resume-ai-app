@@ -1,0 +1,75 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e2]:
+  - banner [ref=e3]:
+    - heading " XYZ Resume Generator" [level=1] [ref=e4]:
+      - generic [ref=e5]: 
+      - text: XYZ Resume Generator
+    - navigation [ref=e6]:
+      - link "Go to Resume" [ref=e7] [cursor=pointer]:
+        - /url: /resume
+      - link "Go to Cover Letter" [active] [ref=e8] [cursor=pointer]:
+        - /url: /cover-letter
+    - paragraph [ref=e9]: Create ATS-friendly resumes using the proven XYZ methodology
+    - generic [ref=e10]:
+      - heading "XYZ Methodology" [level=3] [ref=e11]
+      - generic [ref=e12]:
+        - generic [ref=e13]:
+          - strong [ref=e14]: X
+          - text: = Situation/Task
+        - generic [ref=e15]:
+          - strong [ref=e16]: "Y"
+          - text: = Action/Contribution
+        - generic [ref=e17]:
+          - strong [ref=e18]: Z
+          - text: = Results (quantified)
+  - generic [ref=e19]:
+    - generic [ref=e20]:
+      - button "Personal Info" [ref=e21] [cursor=pointer]
+      - button "Candidate Type" [ref=e22] [cursor=pointer]
+      - button "Experience" [ref=e23] [cursor=pointer]
+      - button "Projects" [ref=e24] [cursor=pointer]
+      - button "Education" [ref=e25] [cursor=pointer]
+      - button "Skills & Certifications" [ref=e26] [cursor=pointer]
+      - button "Job Targeting" [ref=e27] [cursor=pointer]
+    - generic [ref=e28]:
+      - generic [ref=e29]:
+        - heading " Personal Information" [level=3] [ref=e30]:
+          - generic [ref=e31]: 
+          - text: Personal Information
+        - generic [ref=e32]:
+          - generic [ref=e33]:
+            - generic [ref=e34]: Full Name *
+            - textbox "Full Name *" [ref=e35]
+          - generic [ref=e36]:
+            - generic [ref=e37]: Email *
+            - textbox "Email *" [ref=e38]
+        - generic [ref=e39]:
+          - generic [ref=e40]:
+            - generic [ref=e41]: Phone
+            - textbox "Phone" [ref=e42]
+          - generic [ref=e43]:
+            - generic [ref=e44]: Location
+            - textbox "Location" [ref=e45]
+        - generic [ref=e46]:
+          - generic [ref=e47]:
+            - generic [ref=e48]: LinkedIn URL
+            - textbox "LinkedIn URL" [ref=e49]
+          - generic [ref=e50]:
+            - generic [ref=e51]: GitHub URL
+            - textbox "GitHub URL" [ref=e52]
+        - generic [ref=e53]:
+          - generic [ref=e54]: Portfolio URL
+          - textbox "Portfolio URL" [ref=e55]
+      - text:   +  +  +  + 
+      - generic [ref=e56]:
+        - text: 
+        - button "Next " [ref=e57] [cursor=pointer]:
+          - text: Next
+          - generic [ref=e58] [cursor=pointer]: 
+        - button " Generate XYZ Resume" [ref=e59] [cursor=pointer]:
+          - generic [ref=e60] [cursor=pointer]: 
+          - text: Generate XYZ Resume
+  - text:       
+```
