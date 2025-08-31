@@ -47,39 +47,39 @@
           <div class="form-row">
             <div class="form-group">
               <label for="name">Full Name *</label>
-      <input type="text" id="name" required />
+      <input type="text" id="name" name="name" required />
             </div>
             <div class="form-group">
               <label for="email">Email *</label>
-              <input type="email" id="email" required />
+              <input type="email" id="email" name="email" required />
             </div>
           </div>
 
           <div class="form-row">
             <div class="form-group">
               <label for="phone">Phone</label>
-              <input type="text" id="phone" />
+              <input type="text" id="phone" name="phone" />
             </div>
             <div class="form-group">
               <label for="location">Location</label>
-              <input type="text" id="location" placeholder="City, State/Country" />
+              <input type="text" id="location" name="location" placeholder="City, State/Country" />
             </div>
           </div>
 
           <div class="form-row">
             <div class="form-group">
               <label for="linkedin">LinkedIn URL</label>
-              <input type="text" id="linkedin" placeholder="https://www.linkedin.com/in/..." />
+              <input type="text" id="linkedin" name="linkedin" placeholder="https://www.linkedin.com/in/..." />
             </div>
             <div class="form-group">
               <label for="github">GitHub URL</label>
-              <input type="text" id="github" placeholder="https://github.com/..." />
+              <input type="text" id="github" name="github" placeholder="https://github.com/..." />
             </div>
           </div>
 
           <div class="form-group">
             <label for="portfolio">Portfolio URL</label>
-            <input type="text" id="portfolio" placeholder="https://..." />
+            <input type="text" id="portfolio" name="portfolio" placeholder="https://..." />
           </div>
         </div>
 
@@ -89,7 +89,7 @@
           
           <div class="form-group">
             <label for="candidate_type">Candidate Type *</label>
-            <select id="candidate_type" required>
+            <select id="candidate_type" name="candidate_type" required>
               <option value="">Select your experience level</option>
               <option value="fresher">Fresher/Entry Level (0-2 years)</option>
               <option value="experienced">Experienced Professional (2+ years)</option>
@@ -99,22 +99,22 @@
           <div class="form-row">
             <div class="form-group">
               <label for="target_position">Target Position *</label>
-              <input type="text" id="target_position" placeholder="e.g. Frontend Developer" required />
+              <input type="text" id="target_position" name="target_position" placeholder="e.g. Frontend Developer" required />
             </div>
             <div class="form-group">
               <label for="target_industry">Industry</label>
-              <input type="text" id="target_industry" placeholder="e.g. Technology, Finance, Healthcare" />
+              <input type="text" id="target_industry" name="target_industry" placeholder="e.g. Technology, Finance, Healthcare" />
             </div>
           </div>
 
           <div class="form-group">
             <label for="years_experience">Years of Experience</label>
-            <input type="number" id="years_experience" min="0" max="50" placeholder="0" />
+            <input type="number" id="years_experience" name="years_experience" min="0" max="50" placeholder="0" />
           </div>
 
           <div class="form-group">
             <label for="core_competencies">Core Competencies (comma separated)</label>
-            <textarea id="core_competencies" placeholder="e.g. JavaScript, React, Node.js, AWS, Agile Development"></textarea>
+            <textarea id="core_competencies" name="core_competencies" placeholder="e.g. JavaScript, React, Node.js, AWS, Agile Development"></textarea>
           </div>
         </div>
 
@@ -326,28 +326,28 @@
             <div class="form-row">
               <div class="form-group">
                 <label>Programming Languages</label>
-                <input type="text" id="programming-languages" placeholder="JavaScript, Python, Java, C++" />
+                <input type="text" id="programming-languages" name="programming-languages" placeholder="JavaScript, Python, Java, C++" />
               </div>
               <div class="form-group">
                 <label>Frameworks & Libraries</label>
-                <input type="text" id="frameworks" placeholder="React, Angular, Node.js, Express" />
+                <input type="text" id="frameworks" name="frameworks" placeholder="React, Angular, Node.js, Express" />
               </div>
             </div>
             
             <div class="form-row">
               <div class="form-group">
                 <label>Databases</label>
-                <input type="text" id="databases" placeholder="MySQL, MongoDB, PostgreSQL" />
+                <input type="text" id="databases" name="databases" placeholder="MySQL, MongoDB, PostgreSQL" />
               </div>
               <div class="form-group">
                 <label>Tools & Technologies</label>
-                <input type="text" id="tools" placeholder="Git, Docker, Jenkins, AWS" />
+                <input type="text" id="tools" name="tools" placeholder="Git, Docker, Jenkins, AWS" />
               </div>
             </div>
 
             <div class="form-group">
               <label>Cloud Platforms</label>
-              <input type="text" id="cloud-platforms" placeholder="AWS, Azure, Google Cloud" />
+              <input type="text" id="cloud-platforms" name="cloud-platforms" placeholder="AWS, Azure, Google Cloud" />
             </div>
           </div>
 
@@ -396,17 +396,17 @@
           
           <div class="form-group">
             <label for="applied_job_title">Job Title You're Applying For</label>
-            <input type="text" id="applied_job_title" placeholder="e.g. Senior Frontend Developer" />
+            <input type="text" id="applied_job_title" name="applied_job_title" placeholder="e.g. Senior Frontend Developer" />
       </div>
 
           <div class="form-group">
             <label for="applied_company">Company Name</label>
-            <input type="text" id="applied_company" placeholder="e.g. Google, Microsoft, Startup Inc." />
+            <input type="text" id="applied_company" name="applied_company" placeholder="e.g. Google, Microsoft, Startup Inc." />
           </div>
 
           <div class="form-group">
             <label for="job_description">Job Description (paste the full job posting)</label>
-            <textarea id="job_description" rows="8" placeholder="Paste the complete job description here for keyword optimization..."></textarea>
+            <textarea id="job_description" name="job_description" rows="8" placeholder="Paste the complete job description here for keyword optimization..."></textarea>
           </div>
 
           <div class="keyword-extraction">
