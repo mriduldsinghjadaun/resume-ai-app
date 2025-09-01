@@ -4,9 +4,9 @@ import dotenv from 'dotenv';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 import generateResume from './api/generate.js';
-import generateCoverLetter from './api/generate-cover-letter.js';
+import generateCoverLetter from './api/generateCoverLetter.js';
 import generateCoverLetterNew from './api/generateCoverLetter.js';
-import generateResumeNew from './api/generateResume.js';
+import generateResumeFunc from './api/generateResume.js';
 import generateDocument from './api/generateDocument.js';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -25,8 +25,9 @@ app.use(express.static(__dirname));
 // API routes
 app.post('/api/generate', generateResume);
 app.post('/api/generate-cover-letter', generateCoverLetter);
+app.post('/api/generate-resume', generateResumeFunc);
 app.post('/api/generate-cover-letter-new', generateCoverLetterNew);
-app.post('/api/generate-resume-new', generateResumeNew);
+app.post('/api/generate-resume-new', generateResumeFunc);
 app.post('/api/generate-document', generateDocument);
 
 // Serve index.html for root
@@ -42,6 +43,15 @@ app.get('/resume', (req, res) => {
 // Serve cover-letter.html at /cover-letter
 app.get('/cover-letter', (req, res) => {
   res.sendFile(join(__dirname, 'cover-letter.html'));
+});
+
+// Fallback route for React router
+app.get('*', (req, res) => {
+  if (req.path.startsWith('/api')) {
+    console.log(`404 - Not Found: ${req.method} ${req.path}`);
+    return res.status(404).send('Not Found');
+  }
+  res.sendFile(join(__dirname, 'index.html'));
 });
 
 app.listen(PORT, () => {
